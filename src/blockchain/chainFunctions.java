@@ -16,7 +16,7 @@ public class chainFunctions {
             blockchain.add(new Block("genesis block", "0"));
         } else {
             blockchain.add(new Block(i + "th block", blockchain.get(blockchain.size() - 1).hash));
-        } i++;
+        };
     }
 
 }

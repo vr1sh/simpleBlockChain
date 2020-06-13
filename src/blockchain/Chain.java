@@ -6,24 +6,14 @@ import java.util.Scanner;
 public class Chain extends chainFunctions {
 
     public static void main(String[] args) {
-        int i = 0;
-        boolean condition = true;
-        ArrayList<Block> blockchain = new ArrayList<Block>();
         Scanner scan = new Scanner(System.in);
-        System.out.println("Enter: \n1 to add a block \n2 to display the BlockChain\n3 to exit");
-        int n = scan.nextInt();
-        while(condition) {
-            switch(n) {
-                case 1:
-                    addToChain(blockchain, i);
-                    break;
-                case 2:
-                    displayChain(blockchain, i);
-                    break;
-                case 3: condition = false;
-                    break;
-                default: System.out.println("Invalid input. Please try again.");
-            }
+        System.out.println("Enter number of blocks you want the chain to have:");
+        int m = scan.nextInt();
+        int i = 0;
+        ArrayList<Block> blockchain = new ArrayList<Block>();
+        while(i < m) {
+            addToChain(blockchain, i++);
+            displayChain(blockchain, i);
         }
     }
 
