@@ -7,14 +7,14 @@ public class Chain extends chainFunctions {
 
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-        System.out.println("Enter number of blocks you want the chain to have:");
-        int m = scan.nextInt();
-        int i = 0;
+        System.out.println("Number of blocks to generate:");
+        int n = scan.nextInt();
+        int i;
         ArrayList<Block> blockchain = new ArrayList<Block>();
-        while(i < m) {
-            addToChain(blockchain, i++);
-            displayChain(blockchain, i);
+        for(i = 0; i < n; i++) {
+            addToChain(blockchain, i);
         }
+        displayChain(blockchain);
     }
 
 }

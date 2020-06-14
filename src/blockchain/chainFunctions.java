@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.ArrayList;
 
 public class chainFunctions {
-    public static void displayChain(ArrayList<Block> blockchain, int i) {
+    public static void displayChain(ArrayList<Block> blockchain) {
+        int i = 0;
         for (Block block : blockchain) {
-            System.out.println("Hash of block number" + " " + i++ + " is: " + block.hash);
+            System.out.println("Hash of block number" + " " + i + " is: " + block.hash);
             System.out.println();
+            i++;
         }
     }
 
