@@ -15,6 +15,7 @@ public class Chain extends chainFunctions {
             addToChain(blockchain, i);
         }
         displayChain(blockchain);
+        chainValidity(blockchain);
     }
 
 }
