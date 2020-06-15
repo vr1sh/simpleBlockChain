@@ -1,15 +1,24 @@
 package blockchain;
 import blockchain.Chain;
+import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.ArrayList;
 
 public class chainFunctions {
-    public static void displayChain(ArrayList<Block> blockchain) {
-        int i = 0;
-        for (Block block : blockchain) {
-            System.out.println("Hash of block number" + " " + i + " is: " + block.hash);
-            System.out.println();
-            i++;
+
+    public static String applySHA(String input) {
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] hash = digest.digest(input.getBytes("UTF-8"));
+            StringBuffer hexString = new StringBuffer();
+            for (int i = 0; i < hash.length; i++) {
+                String hex = Integer.toHexString(0xff & hash[i]);
+                if (hex.length() == 1) hexString.append('0');
+                hexString.append(hex);
+            }
+            return hexString.toString();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -21,20 +30,27 @@ public class chainFunctions {
         };
     }
 
+    public static void displayChain(ArrayList<Block> blockchain) {
+        int i = 0;
+        for (Block block : blockchain) {
+            System.out.println("Hash of block number" + " " + i + " is: " + block.hash);
+            System.out.println("Hash of previous block: " + block.previousHash);
+            System.out.println();
+            i++;
+        }
+    }
+
     public static void chainValidity(ArrayList<Block> blockchain) {
         Block currentBlock;
         Block previousBlock;
 
-        //loop through blockchain to check hashes:
         for(int i = 1; i < blockchain.size(); i++) {
             currentBlock = blockchain.get(i);
             previousBlock = blockchain.get(i-1);
-            //compare registered hash and calculated hash:
             if(!currentBlock.hash.equals(currentBlock.calcHash()) ){
                 System.out.println("Current Hashes not equal");
                 System.out.println("BlockChain is not valid");
             }
-            //compare previous hash and registered previous hash
             if(!previousBlock.hash.equals(currentBlock.previousHash) ) {
                 System.out.println("Previous Hashes not equal");
                 System.out.println("Chain is not valid");
