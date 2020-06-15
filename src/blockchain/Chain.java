@@ -1,9 +1,12 @@
 package blockchain;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Scanner;
+import java.util.*;
+import java.security.Security;
 
 public class Chain extends chainFunctions {
+
+    public static ArrayList<Block> blockchain = new ArrayList<Block>();
+    public static int difficulty = 5;
+
 
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);

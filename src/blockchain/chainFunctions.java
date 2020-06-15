@@ -28,7 +28,7 @@ public class chainFunctions {
 
     public static void addToChain(ArrayList<Block> blockchain, int i) {
         if(i == 0) {
-            blockchain.add(new Block("genesis block", "0"));
+            blockchain.add(new Block("genesis block","0"));
             blockchain.get(0).mineBlock(difficulty);
         } else {
             blockchain.add(new Block(i + "th block", blockchain.get(blockchain.size() - 1).hash));
@@ -64,40 +64,6 @@ public class chainFunctions {
             }
         }
         System.out.println("Chain passed the validity test");
-    }
-
-
-    //Applies ECDSA Signature and returns the result ( as bytes ).
-    public static byte[] applyECDSASig(PrivateKey privateKey, String input) {
-        Signature dsa;
-        byte[] output = new byte[0];
-        try {
-            dsa = Signature.getInstance("ECDSA", "BC");
-            dsa.initSign(privateKey);
-            byte[] strByte = input.getBytes();
-            dsa.update(strByte);
-            byte[] realSig = dsa.sign();
-            output = realSig;
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-        return output;
-    }
-
-    //Verifies a String signature
-    public static boolean verifyECDSASig(PublicKey publicKey, String data, byte[] signature) {
-        try {
-            Signature ecdsaVerify = Signature.getInstance("ECDSA", "BC");
-            ecdsaVerify.initVerify(publicKey);
-            ecdsaVerify.update(data.getBytes());
-            return ecdsaVerify.verify(signature);
-        } catch(Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public static String getStringFromKey(Key key) {
-        return Base64.getEncoder().encodeToString(key.getEncoded());
     }
 
 }
